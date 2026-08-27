@@ -6,7 +6,7 @@
     "mineru_document_hash": "sha256:f2e389cb66ac10bb363e72d68c7ef5e1e80764ec29c93a38243e48c18f9daf30",
     "pdf_sha256": "7717a278b997bba3007f122f88cafdb4c9684e7cabfc06d174c60febbd3c36b2",
     "mineru_artifact_dir": "/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB.pdf.parsed",
-    "ovis_artifact_dir": "/home/hugo/AI/Ovis/docs/ovisocr2-helion-tb-ocr"
+    "ovis_artifact_dir": "/home/hugo/AI/tools/Ovis/docs/ovisocr2-helion-tb-ocr"
   },
   "mineru": {
     "content_blocks": 27,
@@ -103,7 +103,7 @@
   },
   "throughput": {
     "pdf": "/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB_001.pdf",
-    "model": "/home/hugo/AI/Ovis/model/OvisOCR2",
+    "model": "/home/hugo/AI/tools/Ovis/model/OvisOCR2",
     "dpi": 150,
     "max_tokens": 16384,
     "page_count": 6,

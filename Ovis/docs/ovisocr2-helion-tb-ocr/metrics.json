@@ -1,6 +1,6 @@
 {
   "pdf": "/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB_001.pdf",
-  "model": "/home/hugo/AI/Ovis/model/OvisOCR2",
+  "model": "/home/hugo/AI/tools/Ovis/model/OvisOCR2",
   "dpi": 150,
   "max_tokens": 16384,
   "page_count": 6,

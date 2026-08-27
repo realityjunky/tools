@@ -116,7 +116,7 @@
           <h2>4. Command reference</h2>
           <pre><code>./Ovis/run_ocr.sh IMAGE [OPTIONS]&#10;&#10;Options:&#10;  --model PATH       Override the default local checkpoint&#10;  --output PATH      Write Markdown instead of printing it&#10;  --max-tokens N     Maximum generated tokens; default: 16384</code></pre>
           <p>Example with a custom model path:</p>
-          <pre><code>./Ovis/run_ocr.sh ./pages/contract.jpg &#92;&#10;  --model /home/hugo/AI/Ovis/model/OvisOCR2 &#92;&#10;  --max-tokens 8192 &#92;&#10;  --output ./results/contract.md</code></pre>
+          <pre><code>./Ovis/run_ocr.sh ./pages/contract.jpg &#92;&#10;  --model /home/hugo/AI/tools/Ovis/model/OvisOCR2 &#92;&#10;  --max-tokens 8192 &#92;&#10;  --output ./results/contract.md</code></pre>
         </section>
 
         <section class="section">
@@ -187,7 +187,7 @@
           <p>Use <code>Ovis/run_ocr.sh</code>, not the venv’s Python executable directly. The wrapper adds the CUDA libraries bundled with the installed vLLM stack.</p>
           <pre><code>./Ovis/run_ocr.sh /path/to/page.png --output /path/to/page.md</code></pre>
           <p>If a shell integration requires a direct Python call, export the same library paths first:</p>
-          <pre><code>export LD_LIBRARY_PATH="/home/hugo/AI/Ovis/.venv/lib/python3.12/site-packages/nvidia/cu13/lib:/home/hugo/AI/Ovis/.venv/lib/python3.12/site-packages/torch/lib:${LD_LIBRARY_PATH:-}"&#10;/home/hugo/AI/Ovis/.venv/bin/python /home/hugo/AI/Ovis/run_ocr.py /path/to/page.png</code></pre>
+          <pre><code>export LD_LIBRARY_PATH="/home/hugo/AI/tools/Ovis/.venv/lib/python3.12/site-packages/nvidia/cu13/lib:/home/hugo/AI/tools/Ovis/.venv/lib/python3.12/site-packages/torch/lib:${LD_LIBRARY_PATH:-}"&#10;/home/hugo/AI/tools/Ovis/.venv/bin/python /home/hugo/AI/tools/Ovis/run_ocr.py /path/to/page.png</code></pre>
           <h3>Driver repair, if the mismatch returns</h3>
           <pre><code>uname -r&#10;sudo apt-get update&#10;sudo apt-get install --reinstall nvidia-driver-580 nvidia-utils-580 nvidia-dkms-580 linux-modules-nvidia-580-$(uname -r)&#10;sudo reboot&#10;nvidia-smi</code></pre>
           <p>Save work and check active sessions before rebooting. The kernel-module package name includes the running kernel version; there is no generic package named <code>linux-modules-nvidia-580</code>.</p>
@@ -250,7 +250,7 @@
           <h2>4. 命令参数</h2>
           <pre><code>./Ovis/run_ocr.sh IMAGE [OPTIONS]&#10;&#10;参数：&#10;  --model PATH       覆盖默认的本地模型目录&#10;  --output PATH      将 Markdown 写入文件，而不是打印到终端&#10;  --max-tokens N     最大生成 token 数；默认值：16384</code></pre>
           <p>指定模型目录的例子：</p>
-          <pre><code>./Ovis/run_ocr.sh ./pages/contract.jpg &#92;&#10;  --model /home/hugo/AI/Ovis/model/OvisOCR2 &#92;&#10;  --max-tokens 8192 &#92;&#10;  --output ./results/contract.md</code></pre>
+          <pre><code>./Ovis/run_ocr.sh ./pages/contract.jpg &#92;&#10;  --model /home/hugo/AI/tools/Ovis/model/OvisOCR2 &#92;&#10;  --max-tokens 8192 &#92;&#10;  --output ./results/contract.md</code></pre>
         </section>
 
         <section class="section">
@@ -318,7 +318,7 @@
           <p>请使用 <code>Ovis/run_ocr.sh</code>，不要直接调用虚拟环境中的 Python。启动脚本会加入已安装 vLLM 栈自带的 CUDA 库目录。</p>
           <pre><code>./Ovis/run_ocr.sh /path/to/page.png --output /path/to/page.md</code></pre>
           <p>如果某个 shell 集成必须直接调用 Python，请先设置相同的动态库路径：</p>
-          <pre><code>export LD_LIBRARY_PATH="/home/hugo/AI/Ovis/.venv/lib/python3.12/site-packages/nvidia/cu13/lib:/home/hugo/AI/Ovis/.venv/lib/python3.12/site-packages/torch/lib:${LD_LIBRARY_PATH:-}"&#10;/home/hugo/AI/Ovis/.venv/bin/python /home/hugo/AI/Ovis/run_ocr.py /path/to/page.png</code></pre>
+          <pre><code>export LD_LIBRARY_PATH="/home/hugo/AI/tools/Ovis/.venv/lib/python3.12/site-packages/nvidia/cu13/lib:/home/hugo/AI/tools/Ovis/.venv/lib/python3.12/site-packages/torch/lib:${LD_LIBRARY_PATH:-}"&#10;/home/hugo/AI/tools/Ovis/.venv/bin/python /home/hugo/AI/tools/Ovis/run_ocr.py /path/to/page.png</code></pre>
           <h3>如果驱动版本不一致再次出现</h3>
           <pre><code>uname -r&#10;sudo apt-get update&#10;sudo apt-get install --reinstall nvidia-driver-580 nvidia-utils-580 nvidia-dkms-580 linux-modules-nvidia-580-$(uname -r)&#10;sudo reboot&#10;nvidia-smi</code></pre>
           <p>重启前请保存工作并检查当前会话。内核模块包名包含正在运行的内核版本；不存在通用的 <code>linux-modules-nvidia-580</code> 包。</p>
@@ -347,7 +347,7 @@
         </section>
       </article>
     </main>
-    <footer class="footer"><strong>Local artifact:</strong> <code>/home/hugo/AI/Ovis/docs/ovisocr2-local-use-guide.html</code><br>The guide is bilingual, self-contained, and does not load external JavaScript or CSS. External source links require network access.</footer>
+    <footer class="footer"><strong>Local artifact:</strong> <code>/home/hugo/AI/tools/Ovis/docs/ovisocr2-local-use-guide.html</code><br>The guide is bilingual, self-contained, and does not load external JavaScript or CSS. External source links require network access.</footer>
   </div>
   <script>
     const buttons = [...document.querySelectorAll("[data-language-button]")];
