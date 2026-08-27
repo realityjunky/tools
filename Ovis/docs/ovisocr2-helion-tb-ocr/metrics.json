@@ -1,0 +1,51 @@
+{
+  "pdf": "/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB_001.pdf",
+  "model": "/home/hugo/AI/Ovis/model/OvisOCR2",
+  "dpi": 150,
+  "max_tokens": 16384,
+  "page_count": 6,
+  "render_seconds": 2.276,
+  "engine_init_seconds": 126.396,
+  "inference_seconds": 87.565,
+  "total_seconds": 216.24,
+  "inference_pages_per_minute": 4.111,
+  "end_to_end_pages_per_minute": 1.665,
+  "pages": [
+    {
+      "page": 1,
+      "seconds": 30.853,
+      "characters": 3996,
+      "words": 558
+    },
+    {
+      "page": 2,
+      "seconds": 7.941,
+      "characters": 4773,
+      "words": 704
+    },
+    {
+      "page": 3,
+      "seconds": 7.849,
+      "characters": 3635,
+      "words": 574
+    },
+    {
+      "page": 4,
+      "seconds": 20.503,
+      "characters": 6012,
+      "words": 593
+    },
+    {
+      "page": 5,
+      "seconds": 7.849,
+      "characters": 5155,
+      "words": 780
+    },
+    {
+      "page": 6,
+      "seconds": 12.567,
+      "characters": 5868,
+      "words": 783
+    }
+  ]
+}

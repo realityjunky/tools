@@ -1,0 +1,43 @@
+{
+  "$schema": "./manifest.schema.json",
+  "contract_version": "0.2.1",
+  "advertisement": "static",
+  "generated_from": "server.list_tools",
+  "server": {
+    "name": "vision-bridge",
+    "description": "Local visual image analysis through Qwen3-VL-Plus. OCR, text extraction, and document parsing are intentionally excluded; configure a separate OCR MCP server for those tasks.",
+    "transport": "stdio"
+  },
+  "tools": [
+    {
+      "name": "vision_analyze_image",
+      "description": "Analyze the non-textual visual content of a local image with Qwen3-VL-Plus.\n\nThis tool intentionally does not perform OCR, text extraction, or document\nparsing. Configure a separate OCR MCP server when the task is to read\ntext or table cells. Image bytes are held in memory only.\n",
+      "inputSchema": {
+        "properties": {
+          "image_path": {
+            "title": "Image Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "image_path"
+        ],
+        "title": "vision_analyze_imageArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "vision_analyze_imageOutput",
+        "type": "object"
+      }
+    }
+  ]
+}

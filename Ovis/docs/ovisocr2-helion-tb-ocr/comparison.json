@@ -1,0 +1,232 @@
+{
+  "source": {
+    "pdf": "/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB_001.pdf",
+    "mineru_engine": "mineru",
+    "mineru_parse_time": "2026-06-11T11:02:20.946188+00:00",
+    "mineru_document_hash": "sha256:f2e389cb66ac10bb363e72d68c7ef5e1e80764ec29c93a38243e48c18f9daf30",
+    "pdf_sha256": "7717a278b997bba3007f122f88cafdb4c9684e7cabfc06d174c60febbd3c36b2",
+    "mineru_artifact_dir": "/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB.pdf.parsed",
+    "ovis_artifact_dir": "/home/hugo/AI/Ovis/docs/ovisocr2-helion-tb-ocr"
+  },
+  "mineru": {
+    "content_blocks": 27,
+    "tables": 4,
+    "drawings": 1,
+    "table_captions": [
+      "Table 1 Basic characteristics of the patients.",
+      "Table 2 The accuracy of Xpert and tNGS for the diagnosis of TB in children.",
+      "Table 3 The accuracy of Xpert and tNGS for the discharge diagnosis of TB among various specimens of TB in children.",
+      "Table 4 The resistance results detected by Xpert and tNGS."
+    ],
+    "drawing_captions": [
+      "Fig. 1. Flow chart of the study population."
+    ],
+    "text_characters": 29415,
+    "text_words": 4012
+  },
+  "ovisocr2": {
+    "pages": 6,
+    "text_characters": 29455,
+    "text_words": 3992,
+    "headings": [
+      "Diagnostic value of tNGS vs Xpert MTB/RIF in childhood TB",
+      "ARTICLE INFO",
+      "ABSTRACT",
+      "1. Introduction",
+      "2. Material and methods",
+      "2.1. Study design",
+      "2.2. Patient recruitment",
+      "2.3. Procedures",
+      "2.4. Interferon- $\\gamma$ release assay",
+      "2.5. Xpert assay",
+      "2.6. tNGS",
+      "2.7. Statistical analysis",
+      "3. Results",
+      "3.1. Participants",
+      "3.2. Comparison of Xpert and tNGS for the detection of pediatric tuberculosis",
+      "3.3. Comparison of detection rates among various types of specimens",
+      "3.4. Agreement between Xpert and tNGS",
+      "3.5. Resistance detection",
+      "4. Discussion",
+      "5. Conclusion",
+      "Funding",
+      "Ethical approval",
+      "Data availability statement",
+      "CRediT authorship contribution statement",
+      "Declaration of competing interest",
+      "Appendix A. Supplementary data",
+      "References"
+    ],
+    "heading_count": 27,
+    "html_tables": 4,
+    "image_tags_after_runner_filter": 0,
+    "mineru_token_recall_approx": 0.9598,
+    "normalized_token_sequence_similarity": 0.9205
+  },
+  "critical_fact_checks": {
+    "cohort_103_72_31": {
+      "ovisocr2": true,
+      "mineru": true
+    },
+    "abstract_sensitivity": {
+      "ovisocr2": true,
+      "mineru": true
+    },
+    "abstract_specificity": {
+      "ovisocr2": true,
+      "mineru": true
+    },
+    "specimen_comparison": {
+      "ovisocr2": true,
+      "mineru": true
+    },
+    "resistance_findings": {
+      "ovisocr2": true,
+      "mineru": true
+    },
+    "agreement_statistic": {
+      "ovisocr2": true,
+      "mineru": true
+    },
+    "formula_preservation": {
+      "ovisocr2": true,
+      "mineru": true
+    }
+  },
+  "section_checks": {
+    "1. Introduction": true,
+    "2. Material and methods": true,
+    "3. Results": true,
+    "4. Discussion": true,
+    "5. Conclusion": true,
+    "References": true
+  },
+  "throughput": {
+    "pdf": "/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB_001.pdf",
+    "model": "/home/hugo/AI/Ovis/model/OvisOCR2",
+    "dpi": 150,
+    "max_tokens": 16384,
+    "page_count": 6,
+    "render_seconds": 2.276,
+    "engine_init_seconds": 126.396,
+    "inference_seconds": 87.565,
+    "total_seconds": 216.24,
+    "inference_pages_per_minute": 4.111,
+    "end_to_end_pages_per_minute": 1.665,
+    "pages": [
+      {
+        "page": 1,
+        "seconds": 30.853,
+        "characters": 3996,
+        "words": 558
+      },
+      {
+        "page": 2,
+        "seconds": 7.941,
+        "characters": 4773,
+        "words": 704
+      },
+      {
+        "page": 3,
+        "seconds": 7.849,
+        "characters": 3635,
+        "words": 574
+      },
+      {
+        "page": 4,
+        "seconds": 20.503,
+        "characters": 6012,
+        "words": 593
+      },
+      {
+        "page": 5,
+        "seconds": 7.849,
+        "characters": 5155,
+        "words": 780
+      },
+      {
+        "page": 6,
+        "seconds": 12.567,
+        "characters": 5868,
+        "words": 783
+      }
+    ]
+  },
+  "table_comparison": [
+    {
+      "table": 1,
+      "ovis_rows": 22,
+      "mineru_rows": 22,
+      "ovis_cells": 124,
+      "mineru_cells": 124,
+      "normalized_cell_sequence_similarity": 0.9494,
+      "difference": "LaTeX delimiters versus rendered plus-minus symbols"
+    },
+    {
+      "table": 2,
+      "ovis_rows": 7,
+      "mineru_rows": 7,
+      "ovis_cells": 58,
+      "mineru_cells": 58,
+      "normalized_cell_sequence_similarity": 1.0,
+      "difference": "Whitespace around fraction slashes only"
+    },
+    {
+      "table": 3,
+      "ovis_rows": 5,
+      "mineru_rows": 5,
+      "ovis_cells": 40,
+      "mineru_cells": 40,
+      "normalized_cell_sequence_similarity": 1.0,
+      "difference": "Whitespace around fraction slashes only"
+    },
+    {
+      "table": 4,
+      "ovis_rows": 5,
+      "mineru_rows": 5,
+      "ovis_cells": 18,
+      "mineru_cells": 18,
+      "normalized_cell_sequence_similarity": 1.0,
+      "difference": "No semantic cell difference"
+    }
+  ],
+  "assessment": {
+    "text_and_structure": "Comparable on this six-page example: OvisOCR2 produced 27 headings, 3992 words, and approximately 95.98% MinerU-token recall with 92.05% normalized token-sequence similarity.",
+    "tables": "Comparable: both produced four tables; parsed row and cell counts match, and tables 2-4 have exact normalized cell sequences.",
+    "formulas_and_statistics": "Comparable after notation normalization: plus-minus and kappa values are preserved, with different LaTeX/rendered notation.",
+    "visual_assets_and_provenance": "MinerU is stronger in this pipeline because it preserves one flowchart drawing asset, bbox anchors, block IDs, and asset metadata. The local Ovis runner removes optional image tags and does not save crops.",
+    "limitations": "This is a one-document engineering comparison, not a human-annotated accuracy benchmark. It should not be generalized to all layouts or languages."
+  },
+  "telemetry": {
+    "sampling_interval_seconds": 1,
+    "gpu": {
+      "samples": 228,
+      "active_samples": 98,
+      "average_utilization_percent": 36.34,
+      "active_average_utilization_percent": 84.55,
+      "peak_utilization_percent": 100.0,
+      "average_memory_used_mib": 6807.18,
+      "peak_memory_used_mib": 12770.0,
+      "memory_total_mib": 16380.0,
+      "peak_memory_percent": 77.96,
+      "average_power_watts": 52.79,
+      "peak_power_watts": 138.54,
+      "peak_temperature_celsius": 62.0
+    },
+    "system": {
+      "samples": 228,
+      "average_cpu_busy_percent": 3.32,
+      "peak_cpu_busy_percent": 17,
+      "minimum_free_memory_kib": 287508,
+      "minimum_free_plus_buffers_plus_cache_kib": 35259532
+    },
+    "process_tree": {
+      "samples": 209,
+      "peak_cpu_percent": 918.0,
+      "average_sample_cpu_percent": 171.44,
+      "peak_rss_kib_sum": 5859708,
+      "peak_pmem_percent_sum": 8.8
+    },
+    "interpretation": "GPU and process samples include rendering, engine initialization, warmup, and page inference. Inference throughput excludes engine initialization; end-to-end throughput includes it."
+  }
+}

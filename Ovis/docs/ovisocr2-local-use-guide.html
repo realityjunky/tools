@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bilingual local-use guide for OvisOCR2 on the Hugo workstation.">
+  <title>OvisOCR2 Local Use Guide / OvisOCR2 本地使用指南</title>
+  <style>
+    :root { color-scheme: dark; --bg: #07131b; --panel: #0d202a; --panel-2: #102b36; --line: #244653; --text: #e8f1f2; --muted: #a8c1c5; --accent: #61d8c2; --accent-soft: #b9f1e7; --warn: #f3c969; --danger: #ff9b8d; --code: #061016; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: radial-gradient(circle at 10% 0%, rgba(97,216,194,.14), transparent 28rem), radial-gradient(circle at 100% 10%, rgba(64,130,166,.18), transparent 24rem), var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    a { color: var(--accent-soft); }
+    a:hover { color: white; }
+    .shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .hero { padding: 62px 0 36px; }
+    .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2, h3 { line-height: 1.2; margin: 0 0 16px; }
+    h1 { max-width: 850px; font-size: clamp(2.3rem, 6vw, 5.2rem); letter-spacing: -.055em; }
+    h2 { color: var(--accent-soft); font-size: clamp(1.55rem, 3vw, 2.2rem); margin-top: 8px; }
+    h3 { color: white; font-size: 1.08rem; }
+    p { margin: 0 0 16px; }
+    ul, ol { margin: 0 0 18px; padding-left: 1.35rem; }
+    li + li { margin-top: 7px; }
+    .hero-copy { color: var(--muted); font-size: 1.12rem; max-width: 790px; }
+    .toolbar { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; margin-top: 28px; }
+    .language-switcher { display: inline-flex; gap: 6px; padding: 5px; border: 1px solid var(--line); border-radius: 999px; background: rgba(13,32,42,.9); }
+    .language-switcher button { border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font: inherit; font-size: .88rem; font-weight: 800; padding: 8px 14px; }
+    .language-switcher button[aria-pressed="true"] { background: var(--accent); color: #05201c; }
+    .verified { color: var(--accent-soft); font-size: .88rem; }
+    .verified strong { color: var(--accent); }
+    .status-grid, .content-grid { display: grid; gap: 16px; }
+    .status-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 10px 0 36px; }
+    .content-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card, .section { background: linear-gradient(145deg, rgba(16,43,54,.96), rgba(9,27,36,.96)); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 22px 70px rgba(0,0,0,.28); }
+    .card { padding: 20px; }
+    .card .label { color: var(--muted); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+    .card .value { color: white; font-size: 1.12rem; font-weight: 750; margin-top: 5px; }
+    .section { margin: 18px 0; padding: clamp(22px, 4vw, 42px); }
+    .section-intro { color: var(--muted); max-width: 780px; }
+    .callout { border-left: 3px solid var(--accent); background: rgba(97,216,194,.08); border-radius: 0 12px 12px 0; margin: 20px 0; padding: 16px 18px; }
+    .callout.warning { border-left-color: var(--warn); background: rgba(243,201,105,.08); }
+    .callout.danger { border-left-color: var(--danger); background: rgba(255,155,141,.08); }
+    .step { display: grid; gap: 16px; grid-template-columns: auto 1fr; margin: 22px 0; }
+    .step-number { align-items: center; background: var(--accent); border-radius: 50%; color: #05201c; display: flex; font-weight: 900; height: 34px; justify-content: center; width: 34px; }
+    pre { background: var(--code); border: 1px solid #1d3a45; border-radius: 12px; color: #d8f8f1; font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .88rem; line-height: 1.55; margin: 14px 0 20px; overflow-x: auto; padding: 16px; white-space: pre-wrap; word-break: break-word; }
+    code { background: rgba(97,216,194,.1); border-radius: 5px; color: var(--accent-soft); font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: .92em; padding: 2px 5px; }
+    pre code { background: transparent; color: inherit; padding: 0; }
+    table { border-collapse: collapse; margin: 16px 0; width: 100%; }
+    th, td { border-bottom: 1px solid var(--line); padding: 12px 10px; text-align: left; vertical-align: top; }
+    th { color: var(--accent-soft); font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; }
+    td { color: var(--muted); }
+    td strong { color: var(--text); }
+    .source-list { display: grid; gap: 10px; padding-left: 1.25rem; }
+    .source-list li { color: var(--muted); }
+    .source-list a { font-weight: 700; }
+    .footer { color: var(--muted); font-size: .86rem; padding: 34px 0 60px; }
+    .footer strong { color: var(--accent-soft); }
+    @media (max-width: 840px) { .status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .content-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 520px) { .shell { width: min(100% - 24px, 1120px); } .hero { padding-top: 38px; } .status-grid { grid-template-columns: 1fr; } .section { border-radius: 15px; padding: 22px 18px; } th, td { font-size: .88rem; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div class="eyebrow">Hugo workstation · local inference</div>
+      <h1>OvisOCR2<br><span style="color: var(--accent);">Local Use Guide</span> / 本地使用指南</h1>
+      <p class="hero-copy">A practical, bilingual guide for running the installed ATH-MaaS/OvisOCR2 page parser on the local NVIDIA RTX 4060 Ti.</p>
+      <div class="toolbar">
+        <div class="language-switcher" role="group" aria-label="Language / 语言">
+          <button type="button" data-language-button="en" aria-pressed="true">English</button>
+          <button type="button" data-language-button="zh" aria-pressed="false">中文</button>
+        </div>
+        <div class="verified"><strong>Verified:</strong> 2026-08-24 · ModelScope checkpoint + GPU OCR smoke test</div>
+      </div>
+    </header>
+    <section class="status-grid" aria-label="Verified environment">
+      <div class="card"><div class="label">GPU</div><div class="value">RTX 4060 Ti · 16 GB</div></div>
+      <div class="card"><div class="label">Driver</div><div class="value">580.178.04</div></div>
+      <div class="card"><div class="label">Inference</div><div class="value">vLLM 0.22.1</div></div>
+      <div class="card"><div class="label">Checkpoint</div><div class="value">OvisOCR2 · BF16</div></div>
+    </section>
+
+    <main>
+      <article class="lang-panel" data-language-panel="en">
+        <section class="section">
+          <h2>1. What is ready</h2>
+          <p class="section-intro">The workstation is already configured for local, single-GPU page parsing. The guide uses the tested wrapper instead of asking you to activate or reconstruct the environment manually.</p>
+          <table><thead><tr><th>Component</th><th>Verified value</th><th>Location</th></tr></thead><tbody>
+            <tr><td><strong>Python</strong></td><td>3.12.13</td><td><code>Ovis/.venv</code></td></tr>
+            <tr><td><strong>PyTorch</strong></td><td>2.11.0+cu129</td><td>Isolated environment</td></tr>
+            <tr><td><strong>vLLM</strong></td><td>0.22.1</td><td>Isolated environment</td></tr>
+            <tr><td><strong>Model</strong></td><td>1,706,030,496-byte safetensors checkpoint</td><td><code>Ovis/model/OvisOCR2</code></td></tr>
+            <tr><td><strong>Source</strong></td><td>ATH-MaaS/OvisOCR2</td><td><a href="https://modelscope.cn/models/ATH-MaaS/OvisOCR2" target="_blank" rel="noopener">ModelScope</a></td></tr>
+          </tbody></table>
+          <div class="callout"><strong>Important:</strong> the host reports CUDA 13.0 capability through the driver, while the tested application uses the vLLM/PyTorch CUDA 12.9 build. Do not upgrade the system CUDA toolkit just to match the driver banner.</div>
+        </section>
+
+        <section class="section">
+          <h2>2. Quick start</h2>
+          <p>Run these commands from the workspace root. The launcher sets the bundled CUDA library path, starts the guarded Python entry point, loads the local checkpoint, and writes Markdown.</p>
+          <div class="step"><div class="step-number">1</div><div><h3>Check the GPU</h3><pre><code>cd /home/hugo/AI&#10;nvidia-smi</code></pre></div></div>
+          <div class="step"><div class="step-number">2</div><div><h3>Parse one page</h3><pre><code>./Ovis/run_ocr.sh /path/to/page.png &#92;&#10;  --output /path/to/page.md</code></pre></div></div>
+          <div class="step"><div class="step-number">3</div><div><h3>Inspect the result</h3><pre><code>sed -n '1,120p' /path/to/page.md</code></pre></div></div>
+          <div class="callout">The input can be any image format supported by Pillow. Use one page per invocation for predictable memory usage.</div>
+        </section>
+
+        <section class="section">
+          <h2>3. Known-good test</h2>
+          <p>Use the model’s downloaded performance image to verify the full local path without supplying your own document.</p>
+          <pre><code>./Ovis/run_ocr.sh &#92;&#10;  Ovis/model/OvisOCR2/performance.png &#92;&#10;  --max-tokens 512 &#92;&#10;  --output /tmp/ovisocr2-check.md&#10;&#10;sed -n '1,80p' /tmp/ovisocr2-check.md</code></pre>
+          <p>The tested run loaded the Qwen3.5 architecture, selected Triton GDN prefill and FlashAttention, and returned Markdown successfully.</p>
+        </section>
+
+        <section class="section">
+          <h2>4. Command reference</h2>
+          <pre><code>./Ovis/run_ocr.sh IMAGE [OPTIONS]&#10;&#10;Options:&#10;  --model PATH       Override the default local checkpoint&#10;  --output PATH      Write Markdown instead of printing it&#10;  --max-tokens N     Maximum generated tokens; default: 16384</code></pre>
+          <p>Example with a custom model path:</p>
+          <pre><code>./Ovis/run_ocr.sh ./pages/contract.jpg &#92;&#10;  --model /home/hugo/AI/Ovis/model/OvisOCR2 &#92;&#10;  --max-tokens 8192 &#92;&#10;  --output ./results/contract.md</code></pre>
+        </section>
+
+        <section class="section">
+          <h2>5. What the output means</h2>
+          <ul>
+            <li>Text is emitted in natural reading order as Markdown.</li>
+            <li>Formulas are requested as LaTeX.</li>
+            <li>Tables are requested as HTML table markup.</li>
+            <li>Optional visual-region <code>&lt;img&gt;</code> references are removed by the bundled runner so the output does not point to crops that were not saved. The official model card includes a separate crop-saving example when those regions are required.</li>
+            <li>OCR output is not authoritative. Review critical text, formulas, tables, and reading order manually.</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>6. First-run behavior and performance</h2>
+          <div class="content-grid">
+            <div class="card"><h3>First launch</h3><p>The first process took about 206 seconds because vLLM compiled kernels, profiled memory, warmed the model, and captured CUDA graphs. This is expected.</p></div>
+            <div class="card"><h3>Later launches</h3><p>vLLM reuses its compile cache under <code>~/.cache/vllm</code>. A new process still has to load the checkpoint and initialize the engine.</p></div>
+            <div class="card"><h3>GPU budget</h3><p>The runner follows the model card with one GPU and <code>gpu_memory_utilization=0.8</code>. The verified run reported about 9 GiB available KV-cache memory.</p></div>
+            <div class="card"><h3>Slow or large pages</h3><p>Start with <code>--max-tokens 8192</code> for a bounded output. Close unrelated GPU jobs before processing high-resolution pages.</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>7. PDF benchmark: OvisOCR2 vs MinerU</h2>
+          <p>This comparison uses <code>/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB_001.pdf</code>, a six-page pediatric tuberculosis article. MinerU’s adjacent artifact reports 27 content blocks, 4 tables, and 1 drawing asset. OvisOCR2 rendered the same PDF at 150 dpi and processed all six pages in one engine session.</p>
+          <p>MinerU evidence is stored beside the source as <code>...TB.pdf.parsed/*blocks.jsonl</code>, <code>*tables.json</code>, and <code>*drawings.json</code>; the source PDF SHA-256 is <code>7717a278b997bba3007f122f88cafdb4c9684e7cabfc06d174c60febbd3c36b2</code>.</p>
+          <div class="callout warning"><strong>Interpretation:</strong> this is a one-document engineering comparison, not a human-annotated accuracy benchmark. It is useful for checking structure-critical behavior, but should not be generalized to every PDF layout.</div>
+          <p>Reproduce the monitored PDF run with:</p>
+          <pre><code>./Ovis/run_pdf.sh /path/to/article.pdf &#92;&#10;  --output-dir Ovis/docs/ocr-run &#92;&#10;  --dpi 150 &#92;&#10;  --max-tokens 16384</code></pre>
+          <table><thead><tr><th>Aspect</th><th>OvisOCR2 local run</th><th>MinerU artifact</th><th>Assessment</th></tr></thead><tbody>
+            <tr><td><strong>Text and structure</strong></td><td>6 pages, 27 headings, 3,992 words; approximately 95.98% MinerU-token recall and 92.05% normalized token-sequence similarity.</td><td>27 content blocks, 4,012 words, bbox anchors and block IDs.</td><td>Comparable for this paper; Ovis reconstructs the same section hierarchy and reading order.</td></tr>
+            <tr><td><strong>Critical facts</strong></td><td>Preserved cohort 103/72/31, sensitivity and specificity values, specimen comparisons, resistance findings, kappa agreement values, and formulas.</td><td>Preserved the same checked facts in structured blocks/tables.</td><td>Comparable on the checked diagnostic facts.</td></tr>
+            <tr><td><strong>Tables</strong></td><td>4 HTML tables, 39 rows, 240 cells. Tables 2–4 have exact normalized cell sequences; Table 1 differs only in rendered plus-minus notation.</td><td>4 table records, 39 rows, 240 cells, with HTML content and captions.</td><td>Comparable table content; MinerU retains table IDs and artifact metadata.</td></tr>
+            <tr><td><strong>Formulas and symbols</strong></td><td>Outputs rendered symbols such as <code>±</code> and <code>κ = 0.361</code>.</td><td>Uses LaTeX forms such as <code>\\pm</code> and <code>\\kappa</code> in table/block text.</td><td>Semantically equivalent after notation normalization.</td></tr>
+            <tr><td><strong>Figures and provenance</strong></td><td>Retains the Fig. 1 caption, but the local runner removes optional <code>&lt;img&gt;</code> references and does not save crops.</td><td>Preserves 1 flowchart asset, caption, path, surrounding text, bbox anchors, and drawing analysis metadata.</td><td>MinerU is stronger for visual-asset preservation and provenance. This is a runner policy, not proof that Ovis cannot emit region tags.</td></tr>
+          </tbody></table>
+          <h3>Measured throughput and resources</h3>
+          <table><thead><tr><th>Metric</th><th>Observed result</th><th>Meaning</th></tr></thead><tbody>
+            <tr><td><strong>Engine initialization</strong></td><td>126.396 s</td><td>Model load, profiling, warmup, CUDA graph setup, and first-run kernel work.</td></tr>
+            <tr><td><strong>Page inference</strong></td><td>87.565 s / 6 pages</td><td>4.111 pages/minute, excluding engine initialization.</td></tr>
+            <tr><td><strong>Cold end-to-end</strong></td><td>216.240 s / 6 pages</td><td>1.665 pages/minute, including rendering and engine startup.</td></tr>
+            <tr><td><strong>GPU</strong></td><td>84.55% average while active; 100% peak; 12,770 / 16,380 MiB peak VRAM; 62 °C peak</td><td>VRAM peak was 77.96% of the RTX 4060 Ti capacity.</td></tr>
+            <tr><td><strong>CPU and system memory</strong></td><td>Process tree peak 918% CPU; 5.59 GiB peak summed RSS; system CPU busy 3.32% average / 17% peak; about 33.6 GiB minimum free+buffer+cache</td><td>CPU percentage can exceed 100% because initialization uses multiple logical cores.</td></tr>
+          </tbody></table>
+          <p>For similar six-page PDFs on this workstation, use <strong>about 4 pages/minute after the engine is warm</strong>, or <strong>about 1.7 pages/minute for a cold one-document run</strong>. Page complexity, rendered DPI, output length, and batching can change this substantially.</p>
+          <p>Evidence: <a href="ovisocr2-helion-tb-ocr/ocr.md">combined OvisOCR2 Markdown</a> · <a href="ovisocr2-helion-tb-ocr/comparison.json">comparison metrics</a> · <a href="ovisocr2-helion-tb-ocr/metrics.json">phase and page timings</a> · <a href="ovisocr2-helion-tb-ocr/telemetry-summary.json">GPU/CPU/memory summary</a> · raw <a href="ovisocr2-helion-tb-ocr/gpu-usage.csv">GPU</a>, <a href="ovisocr2-helion-tb-ocr/system-vmstat.log">system</a>, and <a href="ovisocr2-helion-tb-ocr/process-usage.csv">process</a> samples.</p>
+        </section>
+
+        <section class="section">
+          <h2>8. LiteLLM gateway integration</h2>
+          <p>The current LiteLLM gate exposes OvisOCR2 as the premium alias <code>ovisocr2</code>. LiteLLM runs in Docker and forwards to the host-local vLLM OpenAI-compatible server at <code>http://host.docker.internal:8001/v1</code>. Portal-auth keeps it behind the vision API policy.</p>
+          <p>Set one shared secret in the LiteLLM <code>.env</code> and in the shell that starts vLLM:</p>
+          <pre><code>export OVIS_VLLM_API_KEY='replace-with-a-long-random-value'
+./Ovis/run_vllm_server.sh</code></pre>
+          <p>After the local server is healthy, a gateway request uses the governed alias:</p>
+          <pre><code>curl -sS http://127.0.0.1:4000/v1/chat/completions \
+  -H "Authorization: Bearer $LITELLM_VIRTUAL_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"ovisocr2","messages":[{"role":"user","content":[{"type":"image_url","image_url":{"url":"data:image/png;base64,..."}},{"type":"text","text":"Extract all readable content as Markdown."}]}],"max_tokens":16384}'</code></pre>
+          <div class="callout warning"><strong>Operational gate:</strong> the local vLLM process must be running before LiteLLM can serve this alias. The source deployment also requires the normal clean <code>origin/main</code> and release-mount checks; this workspace change does not restart the live gateway.</div>
+        </section>
+
+        <section class="section">
+          <h2>9. Troubleshooting</h2>
+          <div class="callout danger"><strong>If <code>nvidia-smi</code> fails:</strong> stop before starting OvisOCR2. A driver/library mismatch must be repaired and the host rebooted; a reboot disconnects sessions and stops running GPU jobs.</div>
+          <h3><code>ImportError: libcudart.so.13</code></h3>
+          <p>Use <code>Ovis/run_ocr.sh</code>, not the venv’s Python executable directly. The wrapper adds the CUDA libraries bundled with the installed vLLM stack.</p>
+          <pre><code>./Ovis/run_ocr.sh /path/to/page.png --output /path/to/page.md</code></pre>
+          <p>If a shell integration requires a direct Python call, export the same library paths first:</p>
+          <pre><code>export LD_LIBRARY_PATH="/home/hugo/AI/Ovis/.venv/lib/python3.12/site-packages/nvidia/cu13/lib:/home/hugo/AI/Ovis/.venv/lib/python3.12/site-packages/torch/lib:${LD_LIBRARY_PATH:-}"&#10;/home/hugo/AI/Ovis/.venv/bin/python /home/hugo/AI/Ovis/run_ocr.py /path/to/page.png</code></pre>
+          <h3>Driver repair, if the mismatch returns</h3>
+          <pre><code>uname -r&#10;sudo apt-get update&#10;sudo apt-get install --reinstall nvidia-driver-580 nvidia-utils-580 nvidia-dkms-580 linux-modules-nvidia-580-$(uname -r)&#10;sudo reboot&#10;nvidia-smi</code></pre>
+          <p>Save work and check active sessions before rebooting. The kernel-module package name includes the running kernel version; there is no generic package named <code>linux-modules-nvidia-580</code>.</p>
+        </section>
+
+        <section class="section">
+          <h2>10. Maintenance and integrity</h2>
+          <p>Keep the working application stack pinned unless you plan a new compatibility test.</p>
+          <pre><code>uv pip show --python Ovis/.venv/bin/python &#92;&#10;  vllm torch torchvision transformers Pillow&#10;&#10;sha256sum Ovis/model/OvisOCR2/model.safetensors</code></pre>
+          <p>Expected model checksum:</p>
+          <pre><code>9270560288656ece5cb3a6989001afcf5af8d223bceed4a423c33a008861d009</code></pre>
+          <p><code>Ovis/.gitignore</code> excludes the 12 GiB virtual environment and the downloaded model from version control.</p>
+        </section>
+
+        <section class="section">
+          <h2>11. Sources</h2>
+          <ol class="source-list">
+            <li><a href="https://modelscope.cn/models/ATH-MaaS/OvisOCR2" target="_blank" rel="noopener">OvisOCR2 ModelScope model card</a> — installation, prompt, vLLM settings, image limits, and output behavior.</li>
+            <li><a href="https://modelscope.cn/api/v1/models/ATH-MaaS/OvisOCR2/repo/files?Revision=master&amp;Recursive=true" target="_blank" rel="noopener">OvisOCR2 ModelScope file manifest</a> — file sizes, hashes, and the checkpoint inventory.</li>
+            <li><a href="https://docs.vllm.ai/en/v0.22.1/getting_started/installation/gpu.html" target="_blank" rel="noopener">vLLM 0.22.1 GPU installation</a> — CUDA 12.9 binaries, Python support, GPU capability, fresh environments, and PyTorch backend selection.</li>
+            <li><a href="https://docs.vllm.ai/en/v0.22.1/features/multimodal_inputs/" target="_blank" rel="noopener">vLLM 0.22.1 multimodal inputs</a> — image input concepts and multimodal request structure.</li>
+            <li><a href="https://docs.astral.sh/uv/pip/environments/" target="_blank" rel="noopener">uv Python environments</a> — isolated environments, <code>uv venv</code>, and <code>uv pip install</code> usage.</li>
+            <li><a href="https://docs.astral.sh/uv/guides/integration/pytorch/" target="_blank" rel="noopener">uv with PyTorch</a> — accelerator-specific PyTorch builds and indexes.</li>
+            <li><a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">NVIDIA CUDA GPU compute capability</a> — RTX 4060 Ti capability 8.9.</li>
+          </ol>
+        </section>
+      </article>
+
+      <article class="lang-panel" data-language-panel="zh" hidden>
+        <section class="section">
+          <h2>1. 当前已准备好的环境</h2>
+          <p class="section-intro">这台工作站已经完成本地单 GPU 文档页面解析所需的配置。本指南直接使用经过测试的启动脚本，不要求手动激活或重建 Python 环境。</p>
+          <table><thead><tr><th>组件</th><th>已验证值</th><th>位置</th></tr></thead><tbody>
+            <tr><td><strong>Python</strong></td><td>3.12.13</td><td><code>Ovis/.venv</code></td></tr>
+            <tr><td><strong>PyTorch</strong></td><td>2.11.0+cu129</td><td>隔离环境</td></tr>
+            <tr><td><strong>vLLM</strong></td><td>0.22.1</td><td>隔离环境</td></tr>
+            <tr><td><strong>模型</strong></td><td>1,706,030,496 字节 safetensors 权重</td><td><code>Ovis/model/OvisOCR2</code></td></tr>
+            <tr><td><strong>来源</strong></td><td>ATH-MaaS/OvisOCR2</td><td><a href="https://modelscope.cn/models/ATH-MaaS/OvisOCR2" target="_blank" rel="noopener">ModelScope</a></td></tr>
+          </tbody></table>
+          <div class="callout"><strong>重要：</strong>驱动通过 <code>nvidia-smi</code> 显示 CUDA 13.0 能力，但经过验证的应用使用 CUDA 12.9 构建的 vLLM/PyTorch。不要仅仅因为驱动横幅显示 13.0 就升级系统 CUDA Toolkit。</div>
+        </section>
+
+        <section class="section">
+          <h2>2. 快速开始</h2>
+          <p>在工作区根目录执行以下命令。启动脚本会设置随环境安装的 CUDA 动态库路径，启动带有正确主入口保护的 Python 程序，加载本地模型，并写出 Markdown。</p>
+          <div class="step"><div class="step-number">1</div><div><h3>检查 GPU</h3><pre><code>cd /home/hugo/AI&#10;nvidia-smi</code></pre></div></div>
+          <div class="step"><div class="step-number">2</div><div><h3>解析一页图片</h3><pre><code>./Ovis/run_ocr.sh /path/to/page.png &#92;&#10;  --output /path/to/page.md</code></pre></div></div>
+          <div class="step"><div class="step-number">3</div><div><h3>查看结果</h3><pre><code>sed -n '1,120p' /path/to/page.md</code></pre></div></div>
+          <div class="callout">输入格式只要是 Pillow 支持的图片格式即可。为了保持内存使用可预测，建议每次处理一页。</div>
+        </section>
+
+        <section class="section">
+          <h2>3. 已验证的测试命令</h2>
+          <p>可以使用随模型下载的性能图，在不准备自有文档的情况下验证完整本地链路。</p>
+          <pre><code>./Ovis/run_ocr.sh &#92;&#10;  Ovis/model/OvisOCR2/performance.png &#92;&#10;  --max-tokens 512 &#92;&#10;  --output /tmp/ovisocr2-check.md&#10;&#10;sed -n '1,80p' /tmp/ovisocr2-check.md</code></pre>
+          <p>已验证的运行过程成功加载 Qwen3.5 架构，选择 Triton GDN prefill 和 FlashAttention，并生成 Markdown。</p>
+        </section>
+
+        <section class="section">
+          <h2>4. 命令参数</h2>
+          <pre><code>./Ovis/run_ocr.sh IMAGE [OPTIONS]&#10;&#10;参数：&#10;  --model PATH       覆盖默认的本地模型目录&#10;  --output PATH      将 Markdown 写入文件，而不是打印到终端&#10;  --max-tokens N     最大生成 token 数；默认值：16384</code></pre>
+          <p>指定模型目录的例子：</p>
+          <pre><code>./Ovis/run_ocr.sh ./pages/contract.jpg &#92;&#10;  --model /home/hugo/AI/Ovis/model/OvisOCR2 &#92;&#10;  --max-tokens 8192 &#92;&#10;  --output ./results/contract.md</code></pre>
+        </section>
+
+        <section class="section">
+          <h2>5. 如何理解输出</h2>
+          <ul>
+            <li>正文按照自然阅读顺序输出为 Markdown。</li>
+            <li>公式按提示输出为 LaTeX。</li>
+            <li>表格按提示输出为 HTML table 标记。</li>
+            <li>启动脚本默认移除可选的视觉区域 <code>&lt;img&gt;</code> 引用，避免结果指向没有保存的裁剪图。如果需要视觉区域，ModelScope 模型卡提供了保留标签并保存裁剪图的示例。</li>
+            <li>OCR 结果不是权威事实。关键文字、公式、表格和阅读顺序必须人工复核。</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>6. 首次启动与性能</h2>
+          <div class="content-grid">
+            <div class="card"><h3>第一次启动</h3><p>第一次进程约耗时 206 秒，因为 vLLM 需要编译 kernel、分析显存、预热模型并捕获 CUDA graph。这属于正常现象。</p></div>
+            <div class="card"><h3>后续启动</h3><p>vLLM 会复用 <code>~/.cache/vllm</code> 下的编译缓存，但每个新进程仍需要加载权重并初始化引擎。</p></div>
+            <div class="card"><h3>显存预算</h3><p>启动脚本遵循模型卡的单 GPU 和 <code>gpu_memory_utilization=0.8</code> 设置。已验证运行显示约 9 GiB 可用于 KV cache。</p></div>
+            <div class="card"><h3>较慢或较大的页面</h3><p>可以先使用 <code>--max-tokens 8192</code> 限制输出长度。处理高分辨率页面前请关闭其他 GPU 任务。</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>7. PDF 基准比较：OvisOCR2 与 MinerU</h2>
+          <p>本比较使用 <code>/home/hugo/AI/knowledge-bases/lightrag/data/inputs/__parsed__/2024-Heliyon-Diagnostic value of tNGS vs Xpert MTBRIF in childhood TB_001.pdf</code>，这是一篇 6 页的儿童结核病论文。MinerU 旁边的解析产物报告了 27 个内容块、4 个表格和 1 个绘图资产。OvisOCR2 以 150 dpi 渲染同一个 PDF，并在一个引擎会话中处理全部 6 页。</p>
+          <p>MinerU 证据位于源文件旁边的 <code>...TB.pdf.parsed/*blocks.jsonl</code>、<code>*tables.json</code> 和 <code>*drawings.json</code>；源 PDF 的 SHA-256 为 <code>7717a278b997bba3007f122f88cafdb4c9684e7cabfc06d174c60febbd3c36b2</code>。</p>
+          <div class="callout warning"><strong>解读边界：</strong>这是一次单文档工程比较，不是人工标注的准确率基准。它适合检查结构关键行为，不应直接外推到所有 PDF 布局。</div>
+          <p>可以使用以下命令复现 PDF 运行：</p>
+          <pre><code>./Ovis/run_pdf.sh /path/to/article.pdf &#92;&#10;  --output-dir Ovis/docs/ocr-run &#92;&#10;  --dpi 150 &#92;&#10;  --max-tokens 16384</code></pre>
+          <table><thead><tr><th>方面</th><th>OvisOCR2 本地运行</th><th>MinerU 产物</th><th>工程判断</th></tr></thead><tbody>
+            <tr><td><strong>文本与结构</strong></td><td>6 页、27 个标题、3,992 个词；相对于 MinerU 的近似 token 召回率 95.98%，标准化 token 序列相似度 92.05%。</td><td>27 个内容块、4,012 个词、bbox 锚点和 block ID。</td><td>在本文档上结果相当；Ovis 重建了相同的章节层级和阅读顺序。</td></tr>
+            <tr><td><strong>关键事实</strong></td><td>保留了 103/72/31 队列数字、敏感度和特异度、标本比较、耐药结果、kappa 一致性值和公式。</td><td>结构化内容块和表格保留了相同的检查事实。</td><td>在本次检查的诊断事实上结果相当。</td></tr>
+            <tr><td><strong>表格</strong></td><td>4 个 HTML 表格、39 行、240 个单元格。表 2–4 的标准化单元格序列完全一致；表 1 只有正负号表示方式不同。</td><td>4 条表格记录、39 行、240 个单元格，并保留 HTML 内容和标题。</td><td>表格内容相当；MinerU 额外保留了表格 ID 和产物元数据。</td></tr>
+            <tr><td><strong>公式与符号</strong></td><td>输出 <code>±</code> 和 <code>κ = 0.361</code> 等渲染符号。</td><td>块和表格文本中使用 <code>\\pm</code>、<code>\\kappa</code> 等 LaTeX 形式。</td><td>经过表示法标准化后语义等价。</td></tr>
+            <tr><td><strong>图形与溯源</strong></td><td>保留 Fig. 1 标题，但当前本地 runner 会移除可选的 <code>&lt;img&gt;</code> 引用，不保存裁剪图。</td><td>保留 1 个流程图资产、标题、路径、周边文本、bbox 锚点和绘图分析元数据。</td><td>在视觉资产保存和溯源方面 MinerU 更强。这是 runner 策略，不代表 Ovis 模型不能输出区域标签。</td></tr>
+          </tbody></table>
+          <h3>实测吞吐与资源</h3>
+          <table><thead><tr><th>指标</th><th>实测结果</th><th>含义</th></tr></thead><tbody>
+            <tr><td><strong>引擎初始化</strong></td><td>126.396 秒</td><td>包括模型加载、显存分析、预热、CUDA graph 设置和首次 kernel 工作。</td></tr>
+            <tr><td><strong>页面推理</strong></td><td>87.565 秒 / 6 页</td><td>不含引擎初始化时为 4.111 页/分钟。</td></tr>
+            <tr><td><strong>冷启动端到端</strong></td><td>216.240 秒 / 6 页</td><td>包括渲染和引擎启动时为 1.665 页/分钟。</td></tr>
+            <tr><td><strong>GPU</strong></td><td>活跃期间平均 84.55%；峰值 100%；显存峰值 12,770 / 16,380 MiB；温度峰值 62 °C</td><td>显存峰值是 RTX 4060 Ti 总容量的 77.96%。</td></tr>
+            <tr><td><strong>CPU 与系统内存</strong></td><td>进程树 CPU 峰值 918%；进程树 RSS 合计峰值 5.59 GiB；系统 CPU 忙碌率平均 3.32% / 峰值 17%；可用的 free+buffer+cache 最低约 33.6 GiB</td><td>初始化使用多个逻辑核，因此进程 CPU 百分比可以超过 100%。</td></tr>
+          </tbody></table>
+          <p>对于这台工作站上的相似 6 页 PDF，可按<strong>引擎预热后约 4 页/分钟</strong>估算；单个文档冷启动则按<strong>约 1.7 页/分钟</strong>估算。页面复杂度、渲染 DPI、输出长度和批处理方式都会显著影响结果。</p>
+          <p>证据：<a href="ovisocr2-helion-tb-ocr/ocr.md">OvisOCR2 合并 Markdown</a> · <a href="ovisocr2-helion-tb-ocr/comparison.json">比较指标</a> · <a href="ovisocr2-helion-tb-ocr/metrics.json">阶段和页面耗时</a> · <a href="ovisocr2-helion-tb-ocr/telemetry-summary.json">GPU/CPU/内存摘要</a> · 原始 <a href="ovisocr2-helion-tb-ocr/gpu-usage.csv">GPU</a>、<a href="ovisocr2-helion-tb-ocr/system-vmstat.log">系统</a>、<a href="ovisocr2-helion-tb-ocr/process-usage.csv">进程</a>采样。</p>
+        </section>
+
+        <section class="section">
+          <h2>8. LiteLLM 网关接入</h2>
+          <p>当前 LiteLLM gate 以 premium 权限的 <code>ovisocr2</code> 别名暴露 OvisOCR2。LiteLLM 在 Docker 中运行，通过 <code>http://host.docker.internal:8001/v1</code> 转发到主机上的 vLLM OpenAI 兼容服务。portal-auth 通过 vision API policy 继续控制访问。</p>
+          <p>在 LiteLLM 的 <code>.env</code> 和启动 vLLM 的 shell 中设置同一个密钥：</p>
+          <pre><code>export OVIS_VLLM_API_KEY='replace-with-a-long-random-value'
+./Ovis/run_vllm_server.sh</code></pre>
+          <p>本地服务健康后，通过网关使用受治理的别名：</p>
+          <pre><code>curl -sS http://127.0.0.1:4000/v1/chat/completions &#92;&#10;  -H "Authorization: Bearer $LITELLM_VIRTUAL_KEY" &#92;&#10;  -H 'Content-Type: application/json' &#92;&#10;  -d '{"model":"ovisocr2","messages":[{"role":"user","content":[{"type":"image_url","image_url":{"url":"data:image/png;base64,..."}},{"type":"text","text":"Extract all readable content as Markdown."}]}],"max_tokens":16384}'</code></pre>
+          <div class="callout warning"><strong>运行门槛：</strong>LiteLLM 服务此别名前，主机上的 vLLM 进程必须已经运行。正式部署仍需要普通的 clean <code>origin/main</code> 和 release mount 检查；本次源代码修改不会重启线上网关。</div>
+        </section>
+
+        <section class="section">
+          <h2>9. 故障排查</h2>
+          <div class="callout danger"><strong>如果 <code>nvidia-smi</code> 失败：</strong>先不要启动 OvisOCR2。必须先修复 NVIDIA 驱动/库版本不一致并重启主机；重启会断开会话并停止运行中的 GPU 任务。</div>
+          <h3><code>ImportError: libcudart.so.13</code></h3>
+          <p>请使用 <code>Ovis/run_ocr.sh</code>，不要直接调用虚拟环境中的 Python。启动脚本会加入已安装 vLLM 栈自带的 CUDA 库目录。</p>
+          <pre><code>./Ovis/run_ocr.sh /path/to/page.png --output /path/to/page.md</code></pre>
+          <p>如果某个 shell 集成必须直接调用 Python，请先设置相同的动态库路径：</p>
+          <pre><code>export LD_LIBRARY_PATH="/home/hugo/AI/Ovis/.venv/lib/python3.12/site-packages/nvidia/cu13/lib:/home/hugo/AI/Ovis/.venv/lib/python3.12/site-packages/torch/lib:${LD_LIBRARY_PATH:-}"&#10;/home/hugo/AI/Ovis/.venv/bin/python /home/hugo/AI/Ovis/run_ocr.py /path/to/page.png</code></pre>
+          <h3>如果驱动版本不一致再次出现</h3>
+          <pre><code>uname -r&#10;sudo apt-get update&#10;sudo apt-get install --reinstall nvidia-driver-580 nvidia-utils-580 nvidia-dkms-580 linux-modules-nvidia-580-$(uname -r)&#10;sudo reboot&#10;nvidia-smi</code></pre>
+          <p>重启前请保存工作并检查当前会话。内核模块包名包含正在运行的内核版本；不存在通用的 <code>linux-modules-nvidia-580</code> 包。</p>
+        </section>
+
+        <section class="section">
+          <h2>10. 维护与完整性检查</h2>
+          <p>除非准备重新做兼容性测试，否则请保持当前应用栈版本不变。</p>
+          <pre><code>uv pip show --python Ovis/.venv/bin/python &#92;&#10;  vllm torch torchvision transformers Pillow&#10;&#10;sha256sum Ovis/model/OvisOCR2/model.safetensors</code></pre>
+          <p>期望的模型校验值：</p>
+          <pre><code>9270560288656ece5cb3a6989001afcf5af8d223bceed4a423c33a008861d009</code></pre>
+          <p><code>Ovis/.gitignore</code> 已排除 12 GiB 的虚拟环境和下载的模型，避免它们被加入版本控制。</p>
+        </section>
+
+        <section class="section">
+          <h2>11. 资料来源</h2>
+          <ol class="source-list">
+            <li><a href="https://modelscope.cn/models/ATH-MaaS/OvisOCR2" target="_blank" rel="noopener">OvisOCR2 ModelScope 模型卡</a>：安装方式、提示词、vLLM 参数、图片尺寸和输出行为。</li>
+            <li><a href="https://modelscope.cn/api/v1/models/ATH-MaaS/OvisOCR2/repo/files?Revision=master&amp;Recursive=true" target="_blank" rel="noopener">OvisOCR2 ModelScope 文件清单</a>：文件大小、哈希和模型文件库存。</li>
+            <li><a href="https://docs.vllm.ai/en/v0.22.1/getting_started/installation/gpu.html" target="_blank" rel="noopener">vLLM 0.22.1 GPU 安装文档</a>：CUDA 12.9 二进制、Python 支持范围、GPU capability、全新环境和 PyTorch backend。</li>
+            <li><a href="https://docs.vllm.ai/en/v0.22.1/features/multimodal_inputs/" target="_blank" rel="noopener">vLLM 0.22.1 多模态输入文档</a>：图片输入和多模态请求结构。</li>
+            <li><a href="https://docs.astral.sh/uv/pip/environments/" target="_blank" rel="noopener">uv Python 环境文档</a>：隔离环境、<code>uv venv</code> 和 <code>uv pip install</code>。</li>
+            <li><a href="https://docs.astral.sh/uv/guides/integration/pytorch/" target="_blank" rel="noopener">uv 与 PyTorch 文档</a>：不同 accelerator 的 PyTorch 构建和索引。</li>
+            <li><a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">NVIDIA CUDA GPU compute capability</a>：RTX 4060 Ti 的 capability 8.9。</li>
+          </ol>
+        </section>
+      </article>
+    </main>
+    <footer class="footer"><strong>Local artifact:</strong> <code>/home/hugo/AI/Ovis/docs/ovisocr2-local-use-guide.html</code><br>The guide is bilingual, self-contained, and does not load external JavaScript or CSS. External source links require network access.</footer>
+  </div>
+  <script>
+    const buttons = [...document.querySelectorAll("[data-language-button]")];
+    const panels = [...document.querySelectorAll("[data-language-panel]")];
+    function setLanguage(language) {
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.languageButton === language)));
+      panels.forEach((panel) => { panel.hidden = panel.dataset.languagePanel !== language; });
+    }
+    buttons.forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.languageButton)));
+  </script>
+</body>
+</html>

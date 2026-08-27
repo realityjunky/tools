@@ -1,0 +1,32 @@
+{
+  "sampling_interval_seconds": 1,
+  "gpu": {
+    "samples": 228,
+    "active_samples": 98,
+    "average_utilization_percent": 36.34,
+    "active_average_utilization_percent": 84.55,
+    "peak_utilization_percent": 100.0,
+    "average_memory_used_mib": 6807.18,
+    "peak_memory_used_mib": 12770.0,
+    "memory_total_mib": 16380.0,
+    "peak_memory_percent": 77.96,
+    "average_power_watts": 52.79,
+    "peak_power_watts": 138.54,
+    "peak_temperature_celsius": 62.0
+  },
+  "system": {
+    "samples": 228,
+    "average_cpu_busy_percent": 3.32,
+    "peak_cpu_busy_percent": 17,
+    "minimum_free_memory_kib": 287508,
+    "minimum_free_plus_buffers_plus_cache_kib": 35259532
+  },
+  "process_tree": {
+    "samples": 209,
+    "peak_cpu_percent": 918.0,
+    "average_sample_cpu_percent": 171.44,
+    "peak_rss_kib_sum": 5859708,
+    "peak_pmem_percent_sum": 8.8
+  },
+  "interpretation": "GPU and process samples include rendering, engine initialization, warmup, and page inference. Inference throughput excludes engine initialization; end-to-end throughput includes it."
+}
