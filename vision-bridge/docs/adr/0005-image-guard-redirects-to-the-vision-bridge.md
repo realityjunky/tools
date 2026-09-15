@@ -4,6 +4,26 @@ Date: 2026-08-06
 
 ## Status
 
+**Retired 2026-09-11. The mechanism this ADR describes no longer exists.**
+
+The platform retired its model-governance capability blobs and the text/vision key split, and the
+Image Guard's whole image ladder went with them: multi-format detection, Path Recovery, Redirect,
+Caption Fallback, and Instructional Text. The gateway hook now enforces External API Entitlements
+and redacts LightRAG provider spans; it does not inspect image content. The Vision Bridge itself is
+unaffected — it remains installable and usable as a user-invoked tool — but nothing redirects a
+model into it any more.
+
+The consequence below still stands, inverted. An image bound for a Text Model is now forwarded to
+the provider as sent, rather than refused or substituted, so a provider that accepts image input
+and answers anyway reproduces precisely the confident answer about an unseen image that this ADR
+was written to prevent. That trade was made deliberately, alongside the retirement of the per-model
+capability classification this Guard was built on.
+
+Everything below is preserved as written. It described the mechanism accurately from its
+implementation on 2026-08-07 until its removal on 2026-09-11.
+
+## Original status
+
 Accepted. Revises the captioning behaviour accepted in [ADR-0002](0002-two-tier-image-input-for-text-only-models.md).
 
 Amended 2026-08-06 with the multi-format detection finding, the three-route Path Recovery

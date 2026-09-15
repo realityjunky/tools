@@ -7,15 +7,17 @@ current behaviour:
 
 - [ADR-0004](0004-vision-bridge-depends-on-mineru-for-document-parsing.md) defines the
   Bridge's isolation from OCR and document parsing.
-- [ADR-0005](0005-image-guard-redirects-to-the-vision-bridge.md) revises the caption-always
-  behaviour below: the Guard now recovers a path and redirects to the Bridge first, and
-  captions only when no path is recoverable.
+- [ADR-0005](0005-image-guard-redirects-to-the-vision-bridge.md) revised the caption-always
+  behaviour below: the Guard recovered a path and redirected to the Bridge first, captions
+  being the fallback. **Retired 2026-09-11** — neither the Guard nor the redirect exists any
+  more, and ADR-0005 now records the removal and what it cost.
 - [ADR-0006](0006-vision-bridge-exposes-two-tools-split-by-input-type.md) fixes the
   Bridge's tool surface at one Qwen3-VL-Plus image-analysis tool.
 
-Terminology has settled since this was written. The **Describe Hook** below is now the **Image
-Guard**, and its substitution behaviour splits into **Redirect** and **Caption Fallback**. The
-`infra/portal-auth` context glossary is authoritative; the old names are deprecated.
+Terminology has settled since this was written, and then retired. The **Describe Hook** below
+became the **Image Guard**, its substitution behaviour splitting into **Redirect** and
+**Caption Fallback**; all three names, and the hook itself, were retired on 2026-09-11. The
+`infra/portal-auth` context glossary is authoritative and records them as retired vocabulary.
 
 Users route CLI and desktop clients at the LiteLLM gateway with a virtual key, and the
 default text model (DeepSeek V4 Flash) accepts text only on both the official and Bailian
